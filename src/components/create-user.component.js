@@ -35,7 +35,7 @@ export default class CreateUser extends Component {
 
     onSubmit(e) {
 
-        e.preventDefault()
+        e.preventDefault() // prevent system from calling default submit action
 
         const user = {
             username: this.state.username,  //  set all values on submit
