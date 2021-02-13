@@ -13,6 +13,7 @@
     "mongoose": "^5.11.15",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
     "web-vitals": "^1.1.0"
   },
@@ -42,7 +43,6 @@
   },
   "description": "COSC 4353 - Software Design Project",
   "main": "index.js",
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"
