@@ -21,8 +21,12 @@ router.route('/add').post((req, res) => {
 })
 
 router.route('/:username').get((req, res) => {
-    User.findById(req.params.username)
-        .then(user => res.json(user))
+    User.findOne({'username':  req.params.username }, 'username password')
+        .then(user => {
+            window.console.log('%s is a user with password %s.', user.username , user.password)
+            res.json(user)
+            
+        })
         .catch(err => res.status(400).json(`Error: ` + err))
 })
 

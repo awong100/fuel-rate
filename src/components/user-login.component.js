@@ -21,12 +21,14 @@ export default class UserLogin extends Component {
         }
     }
 
+    // should run before anything else on each reload
     componentDidMount() {
         axios.get('http://localhost:5500/users/')
             .then(response => {
                 this.setState({
                     users: response.data
                 })
+                //  console.log(this.state.users)
             })
             .catch((err) => {
                 console.log(`Error: ` + err)
@@ -56,9 +58,77 @@ export default class UserLogin extends Component {
 
         console.log(user)
 
-        axios.get('http://localhost:5500/users/' + user.username)
-            .then(res => console.log(res.data))
+        let idlist = []
+        let nameslist = []
+        let passlist = []
+        let currentObjId = ``
+
+        for (let i = 0; i < this.state.users.length; i++){
+            idlist.push(this.state.users[i]._id)
+            nameslist.push(this.state.users[i].username)
+            passlist.push(this.state.users[i].password)
+        }
+
+        //  console.log(idlist, nameslist, passlist)
+        let index = -1
+
+        if (nameslist.includes(user.username)) {
+            index = nameslist.indexOf(String(this.state.username))
+            try{
+                if ((user.username === nameslist[index]) && (user.password === passlist[index])){
+                    currentObjId = idlist[index]
+                    console.log(`LOGIN SUCCESS!`)
+                }
+                else{
+                    console.log(`error!`)
+                }
+            }catch{
+                console.log(`Error: `)
+            }
+            
+        }
+
+        //  console.log(`username found at position: ` + index)
+        //  console.log(`Current object id: ` + currentObjId)
+
+        try{
+            if (currentObjId !== ``){
+                axios.get('http://localhost:5500/users/' + currentObjId)
+            .then(res => {
+                this.setState = {
+                    username: res.data.username,
+                    password: res.data.password
+                }
+                
+                //  console.log(`USER`, res.data)
+            })
             .catch((err) => {console.log(`Error: ` + err)})
+            
+            }
+            else{
+                // default error
+                console.log(`LOGIN UNSUCCESSFUL: NOT A REGISTERED USER`)
+            }
+        }catch{
+            console.log(`ERROR`)
+        }
+
+        
+
+        // if (this.state.username in this.state.users) {
+        //     try{
+        //         if (this.password === this.users[this.username].password){
+        //             //TODO
+        //             console.log(`login successful!`)
+        //             window.location = '/users'
+        //         }
+        //         else{
+        //             console.log(`NOPE!`)
+        //         }
+        //     }catch(err){
+        //         console.log(`Error: ` + err)
+        //     }
+        // }
 
         this.setState({
             username: "",
