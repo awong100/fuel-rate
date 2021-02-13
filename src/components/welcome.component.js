@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import CreateUser from "./components/create-user.component"
+import CreateUser from './create-user.component'
+import UserLogin from './user-login.component'
 
 export default class Welcome extends Component {
     
@@ -7,6 +8,7 @@ export default class Welcome extends Component {
         return (
             <div>
                 <h2>Welcome</h2>
+                <UserLogin />
                 <CreateUser />
             </div>
         )

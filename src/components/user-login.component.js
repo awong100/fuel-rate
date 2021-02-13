@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import "react-datepicker/dist/react-datepicker.css"
 import axios from 'axios'
 
-export default class CreateUser extends Component {
+export default class UserLogin extends Component {
 
     constructor(props){
         super(props)        //  call when defining constructor of a subclass
@@ -19,6 +19,18 @@ export default class CreateUser extends Component {
             password: "",
             users: []
         }
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:5500/users/')
+            .then(response => {
+                this.setState({
+                    users: response.data
+                })
+            })
+            .catch((err) => {
+                console.log(`Error: ` + err)
+            })
     }
 
     onChangeUserName(e) {
@@ -44,23 +56,24 @@ export default class CreateUser extends Component {
 
         console.log(user)
 
-        axios.post('http://localhost:5500/users/add', user)
+        axios.get('http://localhost:5500/users/' + user.username)
             .then(res => console.log(res.data))
+            .catch((err) => {console.log(`Error: ` + err)})
 
         this.setState({
             username: "",
             password: ""
         })
-        //window.location = '/'
+        window.location = '/'
     }
 
     render() {
         return (
             <div>
-                <h3>Create New User</h3>
+                <h3>Existing User</h3>
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
-                        <label>Create Username: </label>
+                        <label>Username: </label>
                         <input type="text" ref="userInput"
                             required
                             className="form-control"
@@ -69,7 +82,7 @@ export default class CreateUser extends Component {
                             </input>
                     </div>
                     <div className="form-group">
-                    <label>New Password: </label>
+                    <label>Password: </label>
                         <input type="text" ref="userInput"
                             required
                             className="form-control"
@@ -78,16 +91,7 @@ export default class CreateUser extends Component {
                             </input>     
                     </div>
                     <div className="form-group">
-                    <label>Confirm New Password: </label>
-                        <input type="text" ref="userInput"
-                            required
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onChangePassword}>
-                            </input>     
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Create New User" className="btn btn-primary" />
+                        <input type="submit" value="Login" className="btn btn-primary" />
                     </div>
                 </form>
             </div>

@@ -8,6 +8,7 @@ import Navbar from "./components/navbar.component"
 import UserList from "./components/user-list.component"
 import CreateUser from "./components/create-user.component"
 import EditUser from './components/edit-user.component';
+import Welcome from './components/welcome.component'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <div className="container">
       <Navbar />
       <br/>
-      <Route path="/" exact component={UserList} />
+      <Route path="/" exact component={Welcome} />
       <Route path="/edit/:id" component={EditUser} />
       <Route path="/users/" exact component={UserList} /> 
       <Route path="/create/" component={CreateUser} />
