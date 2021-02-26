@@ -1,56 +1,44 @@
 import React, { Component } from 'react';
 
 
-class fuel-history extends Component{
+class fuelhistory extends Component {
     constructor(props) {
-        super(props)
-        this.state ={
-            data: [
-                { typeoffuel: "Fuel from database", Amountpurchased: "Amount of fuel purchased", datepurchased: "Date of purchase"},
-                {   typeoffuel: "Fuel from database", Amountpurchased: "Amount of fuel purchased", datepurchased: "Date of purchase"},
-                {   typeoffuel: "Fuel from database", Amountpurchased: "Amount of fuel purchased", datepurchased: "Date of purchase"},
+        super(props) //since we are extending class Table so we have to use super in order to override Component class constructor
+        this.state = { //state is by default an object
+            purchase: [
+                {id: 1,  date: '11/21', amount: '$97'},
+                {id: 2,  date: '03/19', amount: '$56'},
+                {id: 3,  date: '07/16', amount: '$81'},
+                {id: 4,  date: '4/25', amount: '$34'}
             ]
         }
     }
-renderfuel-historyData() {
-    return this.state.students.map((student, index) => {
-        const { typeoffuel, amountpurchased, datepurchased} = data //destructuring
-        return (
-            <tr key={typeoffuel}>
-                <td>{typeoffuel}</td>
-                <td>{amountpurchased}</td>
-                <td>{datepurchased}</td>
-            </tr>
-        )
-    })
-}
-renderfuel-historyHeader() {
-    let header = Object.keys(this.state.data[0])
-    return header.map((key, index) => {
-        return <th key={index}>{key.toUpperCase()}</th>
-    })
-}
 
-render() {
+    renderfuelhistoryData() {
+        return this.state.purchase.map((purchase, index) => {
+            const {id, date, amount} = purchase //destructuring
+            return (
+                <tr key={id}>
+                    <td>{id}</td>
+                    <td>{date}</td>
+                    <td>{amount}</td>
+                </tr>
+            )
+        })
+    }
+
+    render() {
         return (
             <div>
+                <h3>History</h3>
                 <h1 id='title'>History</h1>
-                <table id='data'>
+                <table id='User History'>
                     <tbody>
-                    {this.renderTableData()}
+                    {this.renderfuelhistoryData()}
                     </tbody>
                 </table>
             </div>
         )
     }
-
 }
-function fuel-history() {
-    return(
-        <div>
-            <h3>Purchase History</h3>
-        </div>
-    );
-}
-
-export default fuel-history;
+export default fuelhistory;

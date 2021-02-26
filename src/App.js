@@ -11,7 +11,7 @@ import EditUser from "./components/edit-user.component";
 import Welcome from "./components/welcome.component";
 import ManageUser from "./components/ManageUser";
 import FuelQuote from "./components/FuelQuote";
-//import fuel-history from "./components/fuel-history";
+import fuelhistory from "./components/fuel-history";
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
         <Route path="/create/" component={CreateUser} />
         <Route path="/manage" component={ManageUser} />
         <Route path="/quote" component={FuelQuote} />
+        <Route path="/history" component={{fuelhistory}}/>
       </div>
     </Router>
   );
