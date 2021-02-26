@@ -6,7 +6,7 @@ function fuelQuote() {
       <h3>Manage User</h3>
       <form>
         <div className="form-group">
-          <label>Full Name: </label>
+          <label>Gallons Requested: </label>
           <input
             maxlength="50"
             type="text"
@@ -15,7 +15,7 @@ function fuelQuote() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Address 1: </label>
+          <label>Delivery Address: </label>
           <input
             maxlength="100"
             type="text"
@@ -24,11 +24,11 @@ function fuelQuote() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Address 2: </label>
+          <label>Delivery Date: </label>
           <input maxlength="100" type="text" className="form-control"></input>
         </div>
         <div className="form-group">
-          <label>City: </label>
+          <label>Suggested Price: </label>
           <input type="text" required className="form-control"></input>
         </div>
         <div className="form-group">
@@ -106,3 +106,9 @@ function fuelQuote() {
 }
 
 export default fuelQuote;
+
+// - Gallons Requested (numeric, required)
+// 	- Delivery Address (Non-editable, comes from client profile)
+// 	- Delivery Date (Calender, date picker)
+// 	- Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not building pricing module yet)
+// 	- Total Amount Due (numeric non-editable, calculated (gallons * price))
