@@ -1,97 +1,109 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 // import DatePicker from 'react-datepicker'
 // import "react-datepicker/dist/react-datepicker.css"
-import axios from 'axios'
+import axios from "axios";
 
 export default class EditUser extends Component {
+  constructor(props) {
+    super(props); //  call when defining constructor of a subclass
 
-    constructor(props){
-        super(props)        //  call when defining constructor of a subclass
+    //  binding "this" to each method so that "this" refers to the entire class inside of each method
+    this.onChangeUserName = this.onChangeUserName.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
-        //  binding "this" to each method so that "this" refers to the entire class inside of each method
-        this.onChangeUserName = this.onChangeUserName.bind(this)
-        this.onChangePassword = this.onChangePassword.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+    this.state = {
+      //  create variables in state so that they can be updated automatically
+      username: "",
+      password: "",
+      users: [],
+    };
+  }
 
-
-        this.state = {      //  create variables in state so that they can be updated automatically
-            username: "",   
-            password: "",
-            users: []
-        }
-    }
-
-    componentDidMount() {
-        axios.get('http://localshost:5500/users/' + this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    username: response.data.username,
-                    password: response.data.password
-                })
-            })
-    }
-
-    onChangeUserName(e) {
+  componentDidMount() {
+    axios
+      .get("http://localhost:5500/users/" + this.props.match.params.id)
+      .then((response) => {
         this.setState({
-            username: e.target.value    //  set username to value of textbox
-        })
-    }
+          username: response.data.username,
+          password: response.data.password,
+        });
+      });
+  }
 
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value    //  set password to value of  textbox
-        })
-    }
+  onChangeUserName(e) {
+    this.setState({
+      username: e.target.value, //  set username to value of textbox
+    });
+  }
 
-    onSubmit(e) {
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value, //  set password to value of  textbox
+    });
+  }
 
-        e.preventDefault()
+  onSubmit(e) {
+    e.preventDefault();
 
-        const user = {
-            username: this.state.username,  //  set all values on submit
-            password: this.state.password
-        }
+    const user = {
+      username: this.state.username, //  set all values on submit
+      password: this.state.password,
+    };
 
-        console.log(user)
+    console.log(user);
 
-        axios.post('http://localhost:5500/users/update/' + this.props.match.params.id, user)
-            .then(res => console.log(res.data))
+    axios
+      .post(
+        "http://localhost:5500/users/update/" + this.props.match.params.id,
+        user
+      )
+      .then((res) => console.log(res.data));
 
-        this.setState({
-            username: "",
-            password: ""
-        })
-        //window.location = '/'
-    }
+    this.setState({
+      username: "",
+      password: "",
+    });
+    //window.location = '/'
+  }
 
-    render() {
-        return (
-            <div>
-                <h3>Edit User</h3>
-                <form onSubmit={this.onSubmit}> 
-                    <div className="form-group">
-                        <label>Username: </label>
-                        <input type="text" ref="userInput"
-                            required
-                            className="form-control"
-                            value={this.state.username}
-                            onChange={this.onChangeUserName}>
-                            </input>
-                    </div>
-                    <div className="form-group">
-                    <label>Password: </label>
-                        <input type="text" ref="userInput"
-                            required
-                            className="form-control"
-                            value={this.state.password}
-                            onChange={this.onChangePassword}>
-                            </input>     
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Edit User" className="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
-        )
-    }
+  // TODO: put dots as placeholder for password
+  render() {
+    return (
+      <div>
+        <h3>Edit User</h3>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Username: </label>
+            <input
+              type="text"
+              ref="userInput"
+              required
+              className="form-control"
+              value={this.state.username}
+              onChange={this.onChangeUserName}
+            ></input>
+          </div>
+          <div className="form-group">
+            <label>Password: </label>
+            <input
+              type="text"
+              ref="userInput"
+              required
+              className="form-control"
+              value={this.state.password}
+              onChange={this.onChangePassword}
+            ></input>
+          </div>
+          <div className="form-group">
+            <input
+              type="submit"
+              value="Edit User"
+              className="btn btn-primary"
+            />
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
