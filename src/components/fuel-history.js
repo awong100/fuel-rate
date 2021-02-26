@@ -26,14 +26,20 @@ class fuelhistory extends Component {
             )
         })
     }
+    renderfuelhistoryHeader() {
+        let header = Object.keys(this.state.purchase[0])
+        return header.map((key, index) => {
+            return <th key={index}>{key.toUpperCase()}</th>
+        })
+    }
 
     render() {
         return (
             <div>
-                <h3>History</h3>
-                <h1 id='title'>History</h1>
-                <table id='User History'>
+                <h1 id='title'>History table</h1>
+                <table id='History'>
                     <tbody>
+                    <tr>{this.renderfuelhistoryHeader()}</tr>
                     {this.renderfuelhistoryData()}
                     </tbody>
                 </table>
