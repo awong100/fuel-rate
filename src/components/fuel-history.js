@@ -6,22 +6,25 @@ class fuelhistory extends Component {
     this.state = {
       //state is by default an object
       purchase: [
-        { id: 1, date: "11/21", amount: "$97" },
-        { id: 2, date: "03/19", amount: "$56" },
-        { id: 3, date: "07/16", amount: "$81" },
-        { id: 4, date: "4/25", amount: "$34" },
+        { id: 1, Date: "11/21",Price:"$10.78", Gallons: 9,Total: "$97", Address:"Address" },
+        { id: 2, Date: "03/19",Price:"$9.34" ,  Gallons: 6,Total: "$56", Address:"Address" },
+        { id: 3, Date: "07/16",Price:"$16.20" ,  Gallons: 5,Total: "$81", Address:"Address" },
+        { id: 4, Date: "4/25",Price:"$11.33" ,   Gallons: 3,Total: "$34", Address:"Address" },
       ],
     };
   }
 
   renderfuelhistoryData() {
     return this.state.purchase.map((purchase, index) => {
-      const { id, date, amount } = purchase; //destructuring
+      const { id, Date,Price, Gallons, Total, Address } = purchase; //destructuring
       return (
         <tr key={id}>
           <td>{id}</td>
-          <td>{date}</td>
-          <td>{amount}</td>
+          <td>{Date}</td>
+          <td>{Price}</td>
+          <td>{Gallons}</td>
+          <td>{Total}</td>
+          <td>{Address}</td>
         </tr>
       );
     });
@@ -36,7 +39,7 @@ class fuelhistory extends Component {
   render() {
     return (
       <div>
-        <h1 id="title">History table</h1>
+        <h1 id="title">Purchase History for *Username*</h1>
         <table class="table" id="History">
           <tbody>
             <tr>{this.renderfuelhistoryHeader()}</tr>
