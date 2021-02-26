@@ -1,15 +1,18 @@
 import React from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function fuelQuote() {
   return (
     <div>
-      <h3>Manage User</h3>
+      <h3>Fuel Quote Form</h3>
       <form>
         <div className="form-group">
           <label>Gallons Requested: </label>
           <input
             maxlength="50"
             type="text"
+            pattern="[0-9]*"
             required
             className="form-control"
           ></input>
@@ -21,84 +24,41 @@ function fuelQuote() {
             type="text"
             required
             className="form-control"
+            placeholder="123 Address Ln."
           ></input>
         </div>
         <div className="form-group">
           <label>Delivery Date: </label>
-          <input maxlength="100" type="text" className="form-control"></input>
+          <DatePicker></DatePicker>
         </div>
         <div className="form-group">
           <label>Suggested Price: </label>
-          <input type="text" required className="form-control"></input>
-        </div>
-        <div className="form-group">
-          <label>State: </label>
-          <select type="text" required className="form-control">
-            <option value="AL">AL</option>
-            <option value="AK">AK</option>
-            <option value="AZ">AZ</option>
-            <option value="AR">AR</option>
-            <option value="CA">CA</option>
-            <option value="CO">CO</option>
-            <option value="CT">CT</option>
-            <option value="DE">DE</option>
-            <option value="DC">DC</option>
-            <option value="FL">FL</option>
-            <option value="GA">GA</option>
-            <option value="HI">HI</option>
-            <option value="ID">ID</option>
-            <option value="IL">IL</option>
-            <option value="IN">IN</option>
-            <option value="IA">IA</option>
-            <option value="KS">KS</option>
-            <option value="KY">KY</option>
-            <option value="LA">LA</option>
-            <option value="ME">ME</option>
-            <option value="MD">MD</option>
-            <option value="MA">MA</option>
-            <option value="MI">MI</option>
-            <option value="MN">MN</option>
-            <option value="MS">MS</option>
-            <option value="MO">MO</option>
-            <option value="MT">MT</option>
-            <option value="NE">NE</option>
-            <option value="NV">NV</option>
-            <option value="NH">NH</option>
-            <option value="NJ">NJ</option>
-            <option value="NM">NM</option>
-            <option value="NY">NY</option>
-            <option value="NC">NC</option>
-            <option value="ND">ND</option>
-            <option value="OH">OH</option>
-            <option value="OK">OK</option>
-            <option value="OR">OR</option>
-            <option value="PA">PA</option>
-            <option value="RI">RI</option>
-            <option value="SC">SC</option>
-            <option value="SD">SD</option>
-            <option value="TN">TN</option>
-            <option value="TX">TX</option>
-            <option value="UT">UT</option>
-            <option value="VT">VT</option>
-            <option value="VA">VA</option>
-            <option value="WA">WA</option>
-            <option value="WV">WV</option>
-            <option value="WI">WI</option>
-            <option value="WY">WY</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Zipcode: </label>
           <input
-            minlength="5"
-            maxlength="9"
             type="text"
+            className="form-control"
+            value="From pricing module"
+            readonly
+          ></input>
+          {}
+        </div>
+        <div className="form-group">
+          <label>Total amount due: </label>
+          <input
+            maxlength="50"
+            type="text"
+            pattern="[0-9]*"
             required
             className="form-control"
+            value="123"
           ></input>
         </div>
+
         <div className="form-group">
-          <input type="submit" value="Edit User" className="btn btn-primary" />
+          <input
+            type="submit"
+            value="Get your Quote"
+            className="btn btn-primary"
+          />
         </div>
       </form>
     </div>
