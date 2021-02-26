@@ -11,6 +11,7 @@ import EditUser from "./components/edit-user.component";
 import Welcome from "./components/welcome.component";
 import ManageUser from "./components/ManageUser";
 import FuelQuote from "./components/FuelQuote";
+//import fuel-history from "./components/fuel-history";
 
 function App() {
   return (
