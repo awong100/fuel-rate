@@ -6,7 +6,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
         <Link to="/" className="navbar-brand">
-          SD Project 1
+          Login/Register
         </Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
@@ -16,13 +16,8 @@ export default class Navbar extends Component {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="/create" className="nav-link">
-                Create User
-              </Link>
-            </li>
-            <li className="navbar-item">
               <Link to="/manage" className="nav-link">
-                Manage User
+                Manage Account
               </Link>
             </li>
             <li className="navbar-item">
@@ -32,7 +27,7 @@ export default class Navbar extends Component {
             </li>
               <li className="navbar-item">
                 <Link to="/history" className="nav-link">
-                  History
+                  User History
                 </Link>
             </li>
           </ul>
