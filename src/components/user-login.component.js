@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CreateUser from './create-user.component'
 // import DatePicker from 'react-datepicker'
 // import "react-datepicker/dist/react-datepicker.css"
 import axios from 'axios'
@@ -11,6 +12,7 @@ export default class UserLogin extends Component {
         //  binding "this" to each method so that "this" refers to the entire class inside of each method
         this.onChangeUserName = this.onChangeUserName.bind(this)
         this.onChangePassword = this.onChangePassword.bind(this)
+        this.onCreateUser = this.onCreateUser.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
 
 
@@ -45,6 +47,9 @@ export default class UserLogin extends Component {
         this.setState({
             password: e.target.value    //  set password to value of  textbox
         })
+    }
+    onCreateUser(e) {
+        <CreateUser />
     }
 
     onSubmit(e) {
@@ -162,7 +167,9 @@ export default class UserLogin extends Component {
                             </input>     
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Login" className="btn btn-primary" />
+                        <input type="submit" value=" Login " className="btn btn-primary" />
+                        &nbsp;&nbsp;
+                        <input type="button" form={<CreateUser/>} value=" Register " className="btn btn-primary" />
                     </div>
                 </form>
             </div>
