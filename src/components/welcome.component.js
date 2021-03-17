@@ -9,7 +9,7 @@ export default class Welcome extends Component {
             <div>
                 <h2>Welcome</h2>
                 <UserLogin />
-
+                <CreateUser />
             </div>
         )
     }

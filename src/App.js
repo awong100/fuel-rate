@@ -12,9 +12,6 @@ import Welcome from "./components/welcome.component";
 import ManageUser from "./components/ManageUser";
 import FuelQuote from "./components/FuelQuote";
 import Fuelhistory from "./components/fuel-history";
-//import Loginscreen from './Login.js'
-
-
 
 function App() {
   return (
