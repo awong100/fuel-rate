@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useContext } from 'react'
+import { UserContext } from '../UserContext'
 
 function UserLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
 
+  const { user, setUser } = useContext(UserContext)
+
   const handleSubmit = (e) => {
     e.preventDefault(); // this is to prevent auto reload page
+
+    
 
     axios({
       method: "post",
@@ -20,7 +26,10 @@ function UserLogin() {
     }).then(function (response) {
       if (response.status === 200 && response.data) {
         const userObj = response.data;
+        console.log(`userObj: ` + userObj)
         // TODO: get use userObj.ID, set that in global store using react hooks redux
+        // const user = userObj
+        setUser(userObj)
         history.push("/manage");
       }
     });
@@ -43,7 +52,7 @@ function UserLogin() {
         <div className="form-group">
           <label>Password: </label>
           <input
-            type="text"
+            type="password"
             required
             className="form-control"
             value={password}

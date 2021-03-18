@@ -21,15 +21,11 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json(`Error: ` + err));
 });
 
-// router.route("/login/:username").get((req, res) => {
-//   return res.json(req);
-// });
-
 router.post("/login/", async function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({ username: username, password: password }, "username password")
+  User.findOne({ username: username, password: password })
     .then((user) => res.json(user))
     .catch((err) => res.status(400).json(`Error: ` + err));
 });
@@ -62,7 +58,13 @@ router.route("/:id").delete((req, res) => {
 router.route("/update/:id").post((req, res) => {
   User.findById(req.params.id)
     .then((user) => {
-      user.username = req.body.username;
+      user.name = req.body.name;
+      user.address1 = req.body.address1;
+      user.address2 = req.body.address2;
+      user.city = req.body.city;
+      user.state = req.body.state;
+      user.zip = req.body.zip;
+
       user
         .save()
         .then(() => res.json("User updated!"))

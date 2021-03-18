@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { UserContext} from '../UserContext';
 
-function fuelQuote() {
+
+function FuelQuote() {
+
+  // i was going to use these to save fields so we can use them to generate fuel quote
+  const { user, setUser } = useContext(UserContext)
+  const [gallons, setGallons] = useState(0)
+  const [date, setDate] = useState("")
+  const [total, setTotal] = useState("")
+
+
+  
+
+
+
+
   return (
     <div>
       <h3>Fuel Quote Form</h3>
@@ -10,26 +25,32 @@ function fuelQuote() {
         <div className="form-group">
           <label>Gallons Requested: </label>
           <input
-            maxlength="50"
+            maxLength="50"
             type="text"
             pattern="[0-9]*"
             required
             className="form-control"
+            onChange={(e) => setGallons(this.target.value)}
           ></input>
         </div>
         <div className="form-group">
           <label>Delivery Address: </label>
           <input
-            maxlength="100"
+            maxLength="100"
             type="text"
             required
             className="form-control"
-            placeholder="123 Address Ln."
+            placeholder={user.address1 + 
+              ' ' + user.address2 + 
+              ' ' + user.city + 
+              ', ' + user.state + 
+              ' ' + user.zip}
+            readOnly
           ></input>
         </div>
         <div className="form-group">
           <label>Delivery Date: </label>
-          <DatePicker></DatePicker>
+          <DatePicker />
         </div>
         <div className="form-group">
           <label>Suggested Price: </label>
@@ -37,19 +58,20 @@ function fuelQuote() {
             type="text"
             className="form-control"
             value="From pricing module"
-            readonly
+            readOnly
           ></input>
           {}
         </div>
         <div className="form-group">
           <label>Total amount due: </label>
           <input
-            maxlength="50"
+            maxLength="50"
             type="text"
             pattern="[0-9]*"
             required
             className="form-control"
             value="123"
+            readOnly
           ></input>
         </div>
 
@@ -65,7 +87,7 @@ function fuelQuote() {
   );
 }
 
-export default fuelQuote;
+export default FuelQuote;
 
 // - Gallons Requested (numeric, required)
 // 	- Delivery Address (Non-editable, comes from client profile)

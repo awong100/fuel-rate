@@ -1,40 +1,99 @@
-import React from "react";
+import React, {useContext, useState} from 'react';
+import { useHistory } from "react-router-dom";
+import { UserContext} from '../UserContext';
+import axios from "axios"
 
+// TODO: save input into user model
 
 function ManageUser() {
 
-  // useEffect(() => {
-  //   axios get user by id using userObj.id
-  // })
+  // the way this is currently structured, users are required to modify
+  // all fields even if they desire to modify just 1 field. this is BAD!
+  
+  const [name, setName] = useState("")
+  const [add1, setAdd1] = useState("")
+  const [add2, setAdd2] = useState("")
+  const [city, setCity] = useState("")
+  const [stateAdd, setStateAdd] = useState("")
+  const [zip, setZip] = useState("")
+
+  let history = useHistory()
+
+
+  const { user, setUser } = useContext(UserContext)
+  console.log(user)
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // this is to prevent auto reload page
+    console.log(name, add1, add2, city, stateAdd, zip)
+    //setUser(user)
+    user.name = name
+    user.address1 = add1
+    user.address2 = add2
+    user.city = city
+    user.state = stateAdd
+    user.zip = zip
+
+
+    axios({
+      method: "post",
+      url: "http://localhost:5500/users/update/" + user._id,
+      data: {
+        name: name,
+        address1: add1,
+        address2: add2,
+        city: city,
+        state: stateAdd,
+        zip: zip
+      },
+    }).then((res) => console.log(res.data));
+    history.push("/quote")
+  };
+
   return (
     <div>
-      <h3>Manage User</h3>
-      <form>
+      <h3>Manage User '{ user.username }'</h3>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Full Name: </label>
           <input
-            maxlength="50"
+            maxLength="50"
             type="text"
             required
             className="form-control"
+            defaultValue={user.name}
+            onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
         <div className="form-group">
           <label>Address 1: </label>
           <input
-            maxlength="100"
+            maxLength="100"
             type="text"
             required
             className="form-control"
+            defaultValue={user.address1}
+            onChange={(e) => setAdd1(e.target.value)}
           ></input>
         </div>
         <div className="form-group">
           <label>Address 2: </label>
-          <input maxlength="100" type="text" className="form-control"></input>
+          <input maxLength="100" 
+          type="text" 
+          className="form-control"
+          defaultValue={user.address2}
+          onChange={(e) => setAdd2(e.target.value)}>
+          </input>
         </div>
         <div className="form-group">
           <label>City: </label>
-          <input type="text" required className="form-control"></input>
+          <input type="text" 
+          required 
+          className="form-control"
+          defaultValue={user.city}
+          onChange={(e) => setCity(e.target.value)}>
+          </input>
         </div>
         <div className="form-group">
           <label>State: </label>
@@ -90,16 +149,20 @@ function ManageUser() {
             <option value="WV">WV</option>
             <option value="WI">WI</option>
             <option value="WY">WY</option>
+            value={user.state}
+            onChange={(e) => setStateAdd(e.target.value)}
           </select>
         </div>
         <div className="form-group">
           <label>Zipcode: </label>
           <input
-            minlength="5"
-            maxlength="9"
+            minLength="5"
+            maxLength="9"
             type="text"
             required
             className="form-control"
+            defaultValue={user.zip}
+            onChange={(e) => setZip(e.target.value)}
           ></input>
         </div>
         <div className="form-group">
