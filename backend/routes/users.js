@@ -1,56 +1,74 @@
-const router = require('express').Router()
-let User = require('../models/user.model')
+const router = require("express").Router();
+let User = require("../models/user.model");
 
 //  gets users from mongoDB ATLAS database and returns them in JSON format
-router.route('/').get((req, res) => {
-    User.find()
-        .then(users => res.json(users))
-        .catch(err => res.status(400).json(`Error: ` + err))
-})
+router.route("/").get((req, res) => {
+  User.find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
 
 //  handles post requests
 //  create a new user and save it into the mongoDB ATLAS database
-router.route('/add').post((req, res) => {
-    const username = req.body.username
-    const password = req.body.password
-    const newUser = new User({username, password})
+router.route("/add").post((req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const newUser = new User({ username, password });
 
-    newUser.save()
-        .then(() => res.json('User added!'))
-        .catch(err => res.status(400).json(`Error: ` + err))
-})
+  newUser
+    .save()
+    .then(() => res.json("User added!"))
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
 
-router.route('/:username').get((req, res) => {
-    User.findOne({'username':  req.params.username }, 'username password')
-        .then(user => {
-            window.console.log('%s is a user with password %s.', user.username , user.password)
-            res.json(user)
-            
-        })
-        .catch(err => res.status(400).json(`Error: ` + err))
-})
+// router.route("/login/:username").get((req, res) => {
+//   return res.json(req);
+// });
 
-router.route('/:id').get((req, res) => {
-    User.findById(req.params.id)
-        .then(user => res.json(user))
-        .catch(err => res.status(400).json(`Error: ` + err))
-})
+router.post("/login/", async function (req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
 
-router.route('/:id').delete((req, res) => {
-    User.findByIdAndDelete(req.params.id)
-        .then(() => res.json('User deleted!'))
-        .catch(err => res.status(400).json(`Error: ` + err))
-})
+  User.findOne({ username: username, password: password }, "username password")
+    .then((user) => res.json(user))
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
 
-router.route('/update/:id').post((req, res) => {
-    User.findById(req.params.id)
-        .then(user => {
-            user.username = req.body.username
-            user.save()
-                .then(() => res.json('User updated!'))
-                .catch(err => res.status(400).json(`Error: ` + err))
-        })
-        .catch(err => res.status(400).json(`Error: ` + err))
-})
+router.route("/:username").get((req, res) => {
+  User.findOne({ username: req.params.username }, "username password")
+    .then((user) => {
+      window.console.log(
+        "%s is a user with password %s.",
+        user.username,
+        user.password
+      );
+      res.json(user);
+    })
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
 
-module.exports = router
+router.route("/:id").get((req, res) => {
+  User.findById(req.params.id)
+    .then((user) => res.json(user))
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
+
+router.route("/:id").delete((req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(() => res.json("User deleted!"))
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
+
+router.route("/update/:id").post((req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      user.username = req.body.username;
+      user
+        .save()
+        .then(() => res.json("User updated!"))
+        .catch((err) => res.status(400).json(`Error: ` + err));
+    })
+    .catch((err) => res.status(400).json(`Error: ` + err));
+});
+
+module.exports = router;
