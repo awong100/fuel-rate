@@ -2,6 +2,10 @@ import React from "react";
 
 
 function ManageUser() {
+
+  // useEffect(() => {
+  //   axios get user by id using userObj.id
+  // })
   return (
     <div>
       <h3>Manage User</h3>
