@@ -12,6 +12,7 @@ import ManageUser from "./components/ManageUser";
 import FuelQuote from "./components/FuelQuote";
 import Fuelhistory from "./components/fuel-history";
 import { UserContext } from "./UserContext";
+import UserLogin from "./components/UserLogin";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -25,9 +26,12 @@ function App() {
         <br />
         <UserContext.Provider value={value}>
           <Route path="/" exact component={Welcome} />
+          <Route path="/create" component={CreateUser} />
+          <Route path="/login" component={UserLogin} />
           <Route path="/edit/:id" component={EditUser} />
+
           <Route path="/users/" exact component={UserList} />
-          <Route path="/create/" component={CreateUser} />
+          
           <Route path="/manage" component={ManageUser} />
           <Route path="/quote" component={FuelQuote} />
           <Route path="/history" component={Fuelhistory} />
