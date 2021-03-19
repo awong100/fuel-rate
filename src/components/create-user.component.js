@@ -78,7 +78,7 @@ export default class CreateUser extends Component {
                     </div>
                     <div className="form-group">
                     <label>New Password: </label>
-                        <input type="text" ref="userInput"
+                        <input type="password" ref="userInput"
                             required
                             className="form-control"
                             value={this.state.password}
@@ -87,7 +87,7 @@ export default class CreateUser extends Component {
                     </div>
                     <div className="form-group">
                     <label>Confirm New Password: </label>
-                        <input type="text" ref="userInput"
+                        <input type="password" ref="userInput"
                             required
                             className="form-control"
                                value={this.state.Confirmpassword}

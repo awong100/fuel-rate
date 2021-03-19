@@ -22,7 +22,7 @@ export default class Welcome extends Component {
                         &nbsp;&nbsp;
                         <Link to="/create" className="btn btn-primary">Register</Link>
                     </div>
-                
+
 
             </div>
         )
