@@ -7,7 +7,7 @@ export default class Welcome extends Component {
     render() {
         return (
             <div>
-                <div class="centered">
+                <div className="centered">
                     <h2>TAG FUEL</h2>
                 </div>
                 <div className="centered">
