@@ -54,6 +54,7 @@ function ManageUser() {
   return (
     <div>
       <h3>Manage User '{ user.username }'</h3>
+      <h4 style={{ color: 'red' }} >Note: User must modify all fields if they wish to edit their profile information</h4>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Full Name: </label>
