@@ -35,6 +35,11 @@ export default class Navbar extends Component {
                   History
                 </Link>
             </li>
+            <li className="navbar-item">
+              <Link to="/calc" className="nav-link">
+                Calc
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

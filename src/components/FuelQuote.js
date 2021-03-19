@@ -2,18 +2,39 @@ import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext} from '../UserContext';
-
+import { useHistory } from "react-router-dom";
+import axios from "axios"
 
 function FuelQuote() {
 
   // i was going to use these to save fields so we can use them to generate fuel quote
   const { user, setUser } = useContext(UserContext)
-  const [gallons, setGallons] = useState(0)
+  const [gallons, setGallons] = useState("")
   const [date, setDate] = useState("")
   const [total, setTotal] = useState("")
 
+  let history = useHistory()
+  console.log(user)
 
-  
+  const handleSubmit = (e) => {
+    e.preventDefault(); // this is to prevent auto reload page
+    console.log(gallons, date, total)
+    //setUser(user)
+    user.gallons = gallons
+    user.date = date
+    user.total = total
+
+    axios({
+      method: "post",
+      url: "http://localhost:5500/users/update/" + user._id,
+      data: {
+        gallons: gallons,
+        date: date,
+        tota: total
+      },
+    }).then((res) => console.log(res.data));
+    history.push("/calc")
+    };
 
 
 
@@ -26,11 +47,11 @@ function FuelQuote() {
           <label>Gallons Requested: </label>
           <input
             maxLength="50"
-            type="text"
+            type="numeric"
             pattern="[0-9]*"
             required
             className="form-control"
-            onChange={(e) => setGallons(this.target.value)}
+            onChange={(e) => setGallons(e.target.value)}
           ></input>
         </div>
         <div className="form-group">
@@ -70,7 +91,7 @@ function FuelQuote() {
             pattern="[0-9]*"
             required
             className="form-control"
-            value="123"
+            value={user.gallons}
             readOnly
           ></input>
         </div>

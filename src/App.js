@@ -13,6 +13,7 @@ import FuelQuote from "./components/FuelQuote";
 import Fuelhistory from "./components/fuel-history";
 import { UserContext } from "./UserContext";
 import UserLogin from "./components/UserLogin";
+import QuoteCalc from "./components/quoteCalc";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -35,6 +36,7 @@ function App() {
           <Route path="/manage" component={ManageUser} />
           <Route path="/quote" component={FuelQuote} />
           <Route path="/history" component={Fuelhistory} />
+          <Route path="/calc" component = {QuoteCalc} />
         </UserContext.Provider>
       </div>
     </Router>
