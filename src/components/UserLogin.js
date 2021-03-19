@@ -30,7 +30,14 @@ function UserLogin() {
         // TODO: get use userObj.ID, set that in global store using react hooks redux
         // const user = userObj
         setUser(userObj)
-        history.push("/manage");
+        if (!userObj.name) {
+          history.push("/manage");
+        }
+        else{
+          history.push("/quote")
+        }
+
+        // history.push("/manage");
       }
     });
   };
