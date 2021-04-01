@@ -21,7 +21,7 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json(`Error: ` + err));
 });
 
-router.post("/login/", async function (req, res) {
+router.post("/login", async function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
@@ -30,6 +30,8 @@ router.post("/login/", async function (req, res) {
     .catch((err) => res.status(400).json(`Error: ` + err));
 });
 
+
+//  find one and only select username and password
 router.route("/:username").get((req, res) => {
   User.findOne({ username: req.params.username }, "username password")
     .then((user) => {

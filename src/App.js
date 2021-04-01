@@ -10,7 +10,7 @@ import EditUser from "./components/edit-user.component";
 import Welcome from "./components/welcome.component";
 import ManageUser from "./components/ManageUser";
 import FuelQuote from "./components/FuelQuote";
-import Fuelhistory from "./components/fuel-history";
+import FuelHistory from "./components/fuel-history";
 import { UserContext } from "./UserContext";
 import UserLogin from "./components/UserLogin";
 import QuoteCalc from "./components/quoteCalc";
@@ -31,11 +31,11 @@ function App() {
           <Route path="/login" component={UserLogin} />
           <Route path="/edit/:id" component={EditUser} />
 
-          <Route path="/users/" exact component={UserList} />
+          <Route path="/users/" component={UserList} />
           
           <Route path="/manage" component={ManageUser} />
           <Route path="/quote" component={FuelQuote} />
-          <Route path="/history" component={Fuelhistory} />
+          <Route path="/quotes" component={FuelHistory} />
           <Route path="/calc" component = {QuoteCalc} />
         </UserContext.Provider>
       </div>

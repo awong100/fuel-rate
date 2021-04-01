@@ -2,47 +2,78 @@ import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext} from '../UserContext';
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios"
 
 function FuelQuote() {
 
+
+
   // i was going to use these to save fields so we can use them to generate fuel quote
   const { user, setUser } = useContext(UserContext)
   const [gallons, setGallons] = useState("")
-  const [date, setDate] = useState("")
   const [total, setTotal] = useState("")
+  const [deliveryDate, setDeliveryDate] = useState(new Date())
+
+  const currentPrice = 1.50
+  const [suggestedPrice, setSuggestedPrice] = useState("")
 
   let history = useHistory()
-  console.log(user)
+  // console.log(user)
+
+  const calculateSuggestedPrice = () => {
+    // do some calculations on current price to get suggested price
+  }
+
+  // console.log(useLocation())
 
   const handleSubmit = (e) => {
     e.preventDefault(); // this is to prevent auto reload page
-    console.log(gallons, date, total)
-    //setUser(user)
-    user.gallons = gallons
-    user.date = date
-    user.total = total
+    setTotal(currentPrice * gallons)
 
+
+    const quote = {
+      id: user._id,
+      date: String(deliveryDate),
+      price: Number(currentPrice),
+      gallons: gallons,
+      total: String(currentPrice * gallons),
+      address: user.address1 + ' ' + user.address2,
+      city: user.city,
+      state: user.state,
+      zip: user.zip
+    }  
+
+    console.log(quote)
+
+    // axios.post('http://localhost:5500/quotes/add', quote)
+    //   .then(res => console.log(res.data)) 
+      
     axios({
-      method: "post",
-      url: "http://localhost:5500/users/update/" + user._id,
+      method: 'post',
+      url: 'http://localhost:5500/quotes/add', 
       data: {
+        id: user._id,
+        date: String(deliveryDate),
+        price: Number(currentPrice),
         gallons: gallons,
-        date: date,
-        tota: total
-      },
-    }).then((res) => console.log(res.data));
-    history.push("/calc")
-    };
+        total: String(currentPrice * gallons),
+        address: user.address1 + ' ' + user.address2,
+        city: user.city,
+        state: user.state,
+        zip: user.zip
+      }
+    }).then((res) => console.log(res.data))
 
+    // history.push('/quotes')
 
+  }
 
 
   return (
     <div>
       <h3>Fuel Quote Form</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Gallons Requested: </label>
           <input
@@ -71,17 +102,18 @@ function FuelQuote() {
         </div>
         <div className="form-group">
           <label>Delivery Date: </label>
-          <DatePicker />
+          <DatePicker
+            selected = {deliveryDate}
+            onChange={date => setDeliveryDate(date)}/>
         </div>
         <div className="form-group">
           <label>Suggested Price: </label>
           <input
             type="text"
             className="form-control"
-            value="From pricing module"
+            value={currentPrice}
             readOnly
           ></input>
-          {}
         </div>
         <div className="form-group">
           <label>Total amount due: </label>
@@ -91,7 +123,7 @@ function FuelQuote() {
             pattern="[0-9]*"
             required
             className="form-control"
-            value={user.gallons}
+            value={currentPrice * gallons}
             readOnly
           ></input>
         </div>

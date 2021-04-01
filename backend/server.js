@@ -11,7 +11,7 @@ app.use(cors())
 app.use(express.json())
 
 const uri = process.env.ATLAS_URI
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true})
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
 const connection = mongoose.connection
 try{
     connection.once('open', () => {
@@ -25,6 +25,9 @@ catch{
 
 const usersRouter = require('./routes/users')
 app.use('/users', usersRouter)
+
+const quotesRouter = require('./routes/quotes')
+app.use('/quotes', quotesRouter)
 
 app.listen(port, () => {
     console.log(`Listening at port: ${port}`)

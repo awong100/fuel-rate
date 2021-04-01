@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useContext } from 'react'
 import { UserContext } from '../UserContext'
@@ -11,9 +11,12 @@ function UserLogin() {
 
   const { user, setUser } = useContext(UserContext)
 
+  // console.log(useLocation())
+
   const handleSubmit = (e) => {
     e.preventDefault(); // this is to prevent auto reload page
 
+    // change this to a get call?
     
 
     axios({
