@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext} from '../UserContext';
 import axios from 'axios'
 
@@ -7,10 +7,8 @@ import axios from 'axios'
 
 function FuelHistory() {
  //since we are extending class Table so we have to use super in order to override Component class constructor
-  this.setState = {
-    //state is by default an object
-    quotes: []
-  };
+  const [quotes, setQuotes] = useState([])
+  const { user, setUser } = useContext(UserContext);
 
   const Quote = props => (         //  functional component to store a user row // need to turn the delete into a button
     <tr>
@@ -26,15 +24,13 @@ function FuelHistory() {
     </tr>
   )
 
-  const { user, setUser } = useContext(UserContext);
+  
  
 
   useEffect(() => {
     axios.get('http://localhost:5500/quotes/' + user._id)
         .then(response => {
-            this.setState({
-                quotes: response.data
-            })
+            setQuotes(response.data)
         })
         .catch((err) => {
             console.log(`Error: ` + err)
@@ -42,8 +38,8 @@ function FuelHistory() {
   })
 
   const QuoteList = () => {
-    return this.state.quotes.map(currentQuote => {
-      return <Quote quote = {currentQuote} key={currentQuote.id} />
+    return quotes.map(currentQuote => {
+      return <Quote quote = {currentQuote} key={currentQuote.date} />
     })
   }
 
