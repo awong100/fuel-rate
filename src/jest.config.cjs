@@ -23,6 +23,6 @@ module.exports = {
   testPathIgnorePatterns: ["/build/", "/node_modules/"],
   moduleFileExtensions: [...defaults.moduleFileExtensions, "js", "jsx", "mjs"],
   collectCoverage: true,
-  coverageDirectory: "./coverage/lcov-report",
+  coverageDirectory: "../coverage",
 }
   

@@ -13,7 +13,6 @@ import FuelQuote from "./components/FuelQuote";
 import FuelHistory from "./components/fuel-history";
 import { UserContext } from "./UserContext";
 import UserLogin from "./components/UserLogin";
-import QuoteCalc from "./components/quoteCalc";
 
 function App() {
   const [user, setUser] = useState(null)
