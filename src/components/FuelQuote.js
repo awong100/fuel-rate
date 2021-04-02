@@ -23,6 +23,7 @@ function FuelQuote() {
 
   const calculateSuggestedPrice = () => {
     // do some calculations on current price to get suggested price
+    
   }
 
   // console.log(useLocation())

@@ -1,5 +1,6 @@
 {
   "name": "sd-project",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -24,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --coverage --config ./src/jest.config.cjs",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,5 +50,17 @@
   "main": "index.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-react": "^7.13.13",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.0",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-jsx": "^1.2.0",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.11.0",
+    "jest": "^26.6.0",
+    "react-test-renderer": "^17.0.2"
+  }
 }

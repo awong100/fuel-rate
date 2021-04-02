@@ -36,9 +36,11 @@ function App() {
           <Route path="/manage" component={ManageUser} />
           <Route path="/quote" component={FuelQuote} />
           <Route path="/quotes" component={FuelHistory} />
-          <Route path="/calc" component = {QuoteCalc} />
         </UserContext.Provider>
       </div>
+      <h3 hidden={true} value="/learn react/i">/learn react/i</h3>
+
+
     </Router>
   );
 }
