@@ -53,6 +53,7 @@ function UserLogin() {
           <label>Username: </label>
           <input
             type="text"
+            id="username-textbox"
             required
             className="form-control"
             value={username}
@@ -63,6 +64,7 @@ function UserLogin() {
           <label>Password: </label>
           <input
             type="password"
+            id="password-textbox"
             required
             className="form-control"
             value={password}
