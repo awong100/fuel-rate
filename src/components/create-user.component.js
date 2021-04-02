@@ -69,7 +69,7 @@ export default class CreateUser extends Component {
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
                         <label>Create Username: </label>
-                        <input type="text" ref="userInput"
+                        <input type="text" ref="userInput" id="username-textbox"
                             required
                             className="form-control"
                             value={this.state.username}

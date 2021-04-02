@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext} from '../UserContext';
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios"
 
 function FuelQuote() {
@@ -23,7 +23,7 @@ function FuelQuote() {
 
   const calculateSuggestedPrice = () => {
     // do some calculations on current price to get suggested price
-    
+
   }
 
   // console.log(useLocation())
