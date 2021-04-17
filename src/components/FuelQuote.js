@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext} from '../UserContext';
@@ -15,30 +15,67 @@ function FuelQuote() {
   const [total, setTotal] = useState("")
   const [deliveryDate, setDeliveryDate] = useState(new Date())
 
-  const currentPrice = 1.50
+  // pricing module stuff
+  let base_price = 1.50
+  const [loc_factor, setLocFactor] = useState(0.4)
+  const [rate_history, setRateHistory] = useState(0.0)
+  const [gallons_factor, setGallonsFactor] = useState(0.3)
+  let company_profit_factor = 0.1
+
   const [suggestedPrice, setSuggestedPrice] = useState("")
 
   let history = useHistory()
   // console.log(user)
 
-  const calculateSuggestedPrice = () => {
-    // do some calculations on current price to get suggested price
 
+  useEffect(() => {
+    if (user.state === 'TX'){
+      setLocFactor(0.2)
+    }
+
+    axios.get('http://localhost:5500/quotes/' + user._id)
+      .then(response => {
+        if (response.data.length > 0){
+          setRateHistory(0.1)
+        }
+      })
+      .catch((err) => {
+        console.log(`Error: ` + err)
+      })
+    
+    if (gallons > 1000){
+      setGallonsFactor(0.2)
+    }
+
+    let margin = base_price * (
+      loc_factor
+      - rate_history
+      + gallons_factor
+      + company_profit_factor
+    )
+
+    setSuggestedPrice(margin + base_price)
+
+  }, [user.state, user._id, gallons, base_price, loc_factor, rate_history, gallons_factor, company_profit_factor])
+
+  const calculateSuggestedTotal = () => {
+    // do some calculations on current price to get suggested price
+    setTotal(suggestedPrice * gallons)
   }
 
   // console.log(useLocation())
 
   const handleSubmit = (e) => {
     e.preventDefault(); // this is to prevent auto reload page
-    setTotal(currentPrice * gallons)
+    setTotal(suggestedPrice * gallons)
 
 
     const quote = {
       id: user._id,
       date: String(deliveryDate),
-      price: Number(currentPrice),
+      price: Number(suggestedPrice),
       gallons: gallons,
-      total: String(currentPrice * gallons),
+      total: String(total),
       address: user.address1 + ' ' + user.address2,
       city: user.city,
       state: user.state,
@@ -56,9 +93,9 @@ function FuelQuote() {
       data: {
         id: user._id,
         date: String(deliveryDate),
-        price: Number(currentPrice),
+        price: Number(suggestedPrice),
         gallons: gallons,
-        total: String(currentPrice * gallons),
+        total: String(total),
         address: user.address1 + ' ' + user.address2,
         city: user.city,
         state: user.state,
@@ -66,7 +103,7 @@ function FuelQuote() {
       }
     }).then((res) => console.log(res.data))
 
-    // history.push('/quotes')
+    history.push('/quotes')
 
   }
 
@@ -112,7 +149,7 @@ function FuelQuote() {
           <input
             type="text"
             className="form-control"
-            value={currentPrice}
+            value={suggestedPrice}
             readOnly
           ></input>
         </div>
@@ -124,15 +161,22 @@ function FuelQuote() {
             pattern="[0-9]*"
             required
             className="form-control"
-            value={currentPrice * gallons}
+            value={total}
             readOnly
           ></input>
         </div>
 
         <div className="form-group">
           <input
+            type="button"
+            value="Get Total"
+            className="btn btn-primary"
+            onClick={calculateSuggestedTotal}
+          />
+          <div/>
+          <input
             type="submit"
-            value="Get your Quote"
+            value="Store Quote"
             className="btn btn-primary"
           />
         </div>

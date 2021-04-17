@@ -69,7 +69,7 @@ function FuelHistory() {
   
   return (
     <div>
-      <h3>User Quote History</h3>
+      <h3>{user.name}'s Quote History</h3>
       <table className="table">
         <thead className="thead-light">
           <tr>
