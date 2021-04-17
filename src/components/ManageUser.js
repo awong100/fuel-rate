@@ -100,7 +100,9 @@ function ManageUser() {
         </div>
         <div className="form-group">
           <label>State: </label>
-          <select type="text" required className="form-control">
+          <select type="text" required className="form-control"
+            value={user.state}
+            onChange={(e) =>  setStateAdd(e.target.value)}>
             <option value="AL">AL</option>
             <option value="AK">AK</option>
             <option value="AZ">AZ</option>
@@ -152,8 +154,7 @@ function ManageUser() {
             <option value="WV">WV</option>
             <option value="WI">WI</option>
             <option value="WY">WY</option>
-            value={user.state}
-            onChange={(e) => setStateAdd(e.target.value)}
+            
           </select>
         </div>
         <div className="form-group">
