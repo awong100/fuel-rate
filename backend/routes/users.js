@@ -1,5 +1,7 @@
 const router = require("express").Router();
 let User = require("../models/user.model");
+const bcrypt = require('bcryptjs');
+const reactDom = require("react-dom");
 
 //  gets users from mongoDB ATLAS database and returns them in JSON format
 router.route("/").get((req, res) => {
@@ -13,21 +15,45 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  const newUser = new User({ username, password });
 
-  newUser
-    .save()
-    .then(() => res.json("User added!"))
-    .catch((err) => res.status(400).json(`Error: ` + err));
+  bcrypt.hash(password, 12)
+  .then(hashedpassword=>{
+    const newUser = new User({ username, password:hashedpassword });
+
+    newUser
+      .save()
+      .then(() => res.json("User added!"))
+      .catch((err) => res.status(400).json(`Error: ` + err));
+
+    })
+  
 });
 
 router.post("/login", async function (req, res) {
   var username = req.body.username;
   var password = req.body.password;
 
-  User.findOne({ username: username, password: password })
-    .then((user) => res.json(user))
-    .catch((err) => res.status(400).json(`Error: ` + err));
+  User.findOne({username:username})
+  .then(savedUser=>{
+    if(!savedUser){
+      return res.status(422).json({error: "Username doesn't exist"})
+    }
+    bcrypt.compare(password, savedUser.password)
+    .then(ifMatch=>{
+      if(ifMatch){
+        return res.json(savedUser)
+      }
+      else{
+        return res.status(422).json({error: "Password is invalid"})
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
+
+  })
+  
 });
 
 
