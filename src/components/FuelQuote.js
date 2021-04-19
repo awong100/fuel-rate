@@ -171,13 +171,15 @@ function FuelQuote() {
             type="button"
             value="Get Total"
             className="btn btn-primary"
-            onClick={calculateSuggestedTotal}
+            onClick={(calculateSuggestedTotal)}
           />
-          <div/>
+          <nbsp> </nbsp>
+          
           <input
             type="submit"
             value="Store Quote"
             className="btn btn-primary"
+            
           />
         </div>
       </form>
