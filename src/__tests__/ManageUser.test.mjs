@@ -1,36 +1,56 @@
-import React from 'react';
-import { mount, /**shallow**/ } from 'enzyme';
+import React, { useContext } from 'react';
+import { mount, shallow, ShallowWrapper} from 'enzyme';
+import { UserContext } from '../UserContext'
 import ManageUser from '../components/ManageUser';
 import { MemoryRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom'
+import {TestRenderer, act} from 'react-test-renderer'
+import axios from 'axios'
+import { render } from '@testing-library/react';
 
-it('Testing Names', () => {
-    const wrapper = mount(<MemoryRouter><ManageUser /></MemoryRouter>);
-    let received = wrapper.find({id: "name-textbox"}).simulate('change', {target:{id: "name-textbox", value: "Burrow H"}}).props().value
-    expect(received).toBe("Burrow H");
+let test_user = {
+    username: "username",
+    password: "password",
+    name: "first last"
+} 
+
+// test_user = useContext(UserContext)
+
+// it('renders', () => {
+//     const spy =jest.spyOn(ManageUser.WrappedComponent, 'componentDidMount')
+//     const wrapper = mount(<UserContext.Provider value={test_user}><MemoryRouter><ManageUser /></MemoryRouter></UserContext.Provider>)
+//     expect(spy).toHaveBeenCalled()
+//     wrapper.unmount()
+// });
+
+let container;
+beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
 });
 
-it('Testing Address', () => {
-    const wrapper = mount(<MemoryRouter><ManageUser /></MemoryRouter>);
-    let received = wrapper.find({id: "Add1-textbox"}).simulate('change', {target:{id: "Add1-textbox", value: "345 Final Street"}}).props().value
-    expect(received).toBe("345 Final Street");
+afterEach(() => {
+    document.body.removeChild(container);
+    container = null;
 });
 
-it('Testing City', () => {
-    const wrapper = mount(<MemoryRouter><ManageUser /></MemoryRouter>);
-    let received = wrapper.find({id: "city-textbox"}).simulate('change', {target:{id: "city-textbox", value: "Katy"}}).props().value
-    expect(received).toBe("Katy");
+test("with ReactDOM", () => {
+    act(() => {
+        ReactDOM.render((
+            <UserContext.Provider value={test_user}>
+                <ManageUser />
+            </UserContext.Provider>
+        ), container);
+    });
+
+    expect(container.textContent).toBe({test_user});
 });
 
-it('Testing State', () => {
-    const wrapper = mount(<MemoryRouter><ManageUser /></MemoryRouter>);
-    let received = wrapper.find({id: "state-textbox"}).simulate('change', {target:{id: "state-textbox", value: "TX"}}).props().value
-    expect(received).toBe("TX");
-});
-
-
-it('Testing Zip', () => {
-    const wrapper = mount(<MemoryRouter><ManageUser /></MemoryRouter>);
-    let received = wrapper.find({id: "zip-textbox"}).simulate('change', {target:{id: "zip-textbox", value: "77203"}}).props().value
-    expect(received).toBe("77203");
+test("enzyme dive", () => {
+    const element = mount(<UserContext.Provider value={test_user}>
+        <MemoryRouter><ManageUser /></MemoryRouter>
+    </UserContext.Provider>);
+    // element.getWrappingComponent
+    expect(element.dive().user).toBe(undefined)
 });
 
