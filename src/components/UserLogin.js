@@ -47,13 +47,15 @@ function UserLogin() {
 
   return (
     <div>
+
       <h3 style={{ color: 'white' }}>Existing User</h3>
       <form onSubmit={handleSubmit}>
+
         <div className="form-group">
           <label style={{ color: 'white' }}>Username: </label>
           <input
             type="text"
-            id="username-textbox"
+            name="username-textbox"
             required
             className="form-control"
             value={username}
@@ -64,7 +66,7 @@ function UserLogin() {
           <label style={{ color: 'white' }}>Password: </label>
           <input
             type="password"
-            id="password-textbox"
+            name="password-textbox"
             required
             className="form-control"
             value={password}
@@ -72,7 +74,7 @@ function UserLogin() {
           ></input>
         </div>
         <div className="form-group">
-          <input type="submit" value="Login" className="btn btn-primary" />
+          <input name="login-btn" type="submit" value="Login" className="btn btn-primary" />
         </div>
       </form>
     </div>
