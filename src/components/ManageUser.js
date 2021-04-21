@@ -28,13 +28,24 @@ function ManageUser() {
     e.preventDefault(); // this is to prevent auto reload page
     console.log(name, add1, add2, city, stateAdd, zip)
     //setUser(user)
-    user.name = name
+    if(name != ""){
+      user.name = name
+    }
+    if(add1 != ""){
     user.address1 = add1
+    }
+    if(add2 != ""){
     user.address2 = add2
+    }
+    if(city != ""){
     user.city = city
+    } 
+    if(stateAdd != ""){
     user.state = stateAdd
+    }
+    if(zip != ""){
     user.zip = zip
-
+    }
 
     axios({
       method: "post",
@@ -54,9 +65,9 @@ function ManageUser() {
   return (
     <div>
       <h3 style={{ color: 'white' }}>Manage User '{ user.username }'</h3>
-      <h4 style={{ color: 'red' }} >
+      {/* <h4 style={{ color: 'red' }} >
         Note: User must modify all fields if they wish to edit their profile information
-      </h4>
+      </h4> */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label style={{ color: 'white' }}>Full Name: </label>
@@ -101,7 +112,7 @@ function ManageUser() {
         <div className="form-group">
           <label style={{ color: 'white' }}>State: </label>
           <select type="text" required className="form-control"
-            value={user.state}
+            defaultValue={user.state}
             onChange={(e) =>  setStateAdd(e.target.value)}>
             <option value="AL">AL</option>
             <option value="AK">AK</option>
