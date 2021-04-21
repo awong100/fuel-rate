@@ -69,7 +69,7 @@ export default class CreateUser extends Component {
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
                         <label>Create Username: </label>
-                        <input type="text" ref="userInput" id="username-textbox"
+                        <input type="text" ref="userInput" name="username-textbox"
                             required
                             className="form-control"
                             value={this.state.username}
@@ -78,7 +78,7 @@ export default class CreateUser extends Component {
                     </div>
                     <div className="form-group">
                     <label>New Password: </label>
-                        <input type="password" ref="userInput"
+                        <input type="password" ref="userInput" name="password-textbox"
                             required
                             className="form-control"
                             value={this.state.password}
@@ -87,15 +87,15 @@ export default class CreateUser extends Component {
                     </div>
                     <div className="form-group">
                     <label>Confirm New Password: </label>
-                        <input type="password" ref="userInput"
+                        <input type="password" ref="userInput" name="confirm-password-textbox"
                             required
                             className="form-control"
-                               value={this.state.Confirmpassword}
-                               onChange={this.onChangeConfirmPassword}>
+                            value={this.state.Confirmpassword}
+                            onChange={this.onChangeConfirmPassword}>
                             </input>     
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Create New User" className="btn btn-primary" />
+                        <input name="create-btn" type="submit" value="Create New User" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
