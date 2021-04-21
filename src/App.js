@@ -1,6 +1,7 @@
 import "./App.css";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Switch } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/navbar.component";
@@ -19,14 +20,26 @@ function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
   return (
+    
     <Router>
-      <div className="container">
-        <Navbar />
+      
+      
+      
+      <div className="container">      
+      
+      
+      
+        {/* <Navbar /> */}
         <br />
         <UserContext.Provider value={value}>
+        {user ? (
+          <Route component ={Navbar}/>
+          ): null}
           <Route path="/" exact component={Welcome} />
+          
           <Route path="/create" component={CreateUser} />
           <Route path="/login" component={UserLogin} />
+          
 
           <Route path="/users/" component={UserList} />
           
@@ -36,7 +49,7 @@ function App() {
         </UserContext.Provider>
       </div>
       <h3 hidden={true} value="/learn react/i">/learn react/i</h3>
-
+      
 
     </Router>
   );

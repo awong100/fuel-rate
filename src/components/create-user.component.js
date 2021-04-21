@@ -1,7 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component  } from 'react'
 import axios from 'axios'
+// import { useHistory, Link, useLocation } from "react-router-dom";
 
 export default class CreateUser extends Component {
+    
 
     constructor(props){
         super(props)        //  call when defining constructor of a subclass
@@ -11,7 +13,7 @@ export default class CreateUser extends Component {
         this.onChangePassword = this.onChangePassword.bind(this)
         this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-
+        // let history = useHistory();
 
         this.state = {      //  create variables in state so that they can be updated automatically
             username: "",   
@@ -19,6 +21,7 @@ export default class CreateUser extends Component {
             Confirmpassword:"",
             users: []
         }
+        
     }
 
     onChangeUserName(e) {
@@ -59,16 +62,18 @@ export default class CreateUser extends Component {
             password: "",
             Confirmpassword:""
         })
-        //window.location = '/'
+
+        // history.push("/login");
+        window.location = '/login'
     }
 
     render() {
         return (
             <div>
-                <h3>Create New User</h3>
+                <h3 style={{ color: 'white' }}>Create New User</h3>
                 <form onSubmit={this.onSubmit}> 
                     <div className="form-group">
-                        <label>Create Username: </label>
+                        <label style={{ color: 'white' }}>Create Username: </label>
                         <input type="text" ref="userInput" id="username-textbox"
                             required
                             className="form-control"
@@ -77,7 +82,7 @@ export default class CreateUser extends Component {
                             </input>
                     </div>
                     <div className="form-group">
-                    <label>New Password: </label>
+                    <label style={{ color: 'white' }}>New Password: </label>
                         <input type="password" ref="userInput"
                             required
                             className="form-control"
@@ -86,7 +91,7 @@ export default class CreateUser extends Component {
                             </input>     
                     </div>
                     <div className="form-group">
-                    <label>Confirm New Password: </label>
+                    <label style={{ color: 'white' }}>Confirm New Password: </label>
                         <input type="password" ref="userInput"
                             required
                             className="form-control"

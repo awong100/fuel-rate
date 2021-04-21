@@ -51,7 +51,7 @@ export default class UserList extends Component {
     render() {
         return (
             <div>
-                <h3>Users List</h3>
+                <h3 style={{ color: 'white' }}>Users List</h3>
                 <table className="table">
                     <thead className="thead-light">
                         <tr>
@@ -60,7 +60,7 @@ export default class UserList extends Component {
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{ color: 'white' }}>
                         { this.userList() }
                     </tbody>
                 </table>

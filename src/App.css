@@ -1,10 +1,12 @@
 .App {
   text-align: center;
+  background-color: #282c34;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 100vh;
   pointer-events: none;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,14 +16,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #1d3d7c;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(161, 54, 54);
 }
 
 .App-link {
@@ -37,9 +39,9 @@
   }
 }
 
-.container {
-  background-color: rgba(211,211,211, 0.5);
-}
+/* .container {
+  background-color: rgba(87, 64, 64, 0.5);
+} */
 
 #title {
   text-align: center;
@@ -50,28 +52,28 @@
   text-align: center;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  border: 3px solid #ddd;
+  border: 3px solid #282c34;
   width: 100%;
 }
 
 #purchase td, #purhcase th {
-  border: 1px solid #ddd;
+  border: 1px solid rgb(116, 100, 100);
   padding: 8px;
 }
 
-#purchase tr:nth-child(even){background-color: #f2f2f2;}
+#purchase tr:nth-child(even){background-color: #6d6161;}
 
-#purchase tr:hover {background-color: #ddd;}
+#purchase tr:hover {background-color: rgb(83, 67, 67);}
 
 #purchase th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
   background-color: #4CAF50;
-  color: white;
+  color: rgb(185, 148, 148);
 }
 
-@keyframes gradient {
+/* @keyframes gradient {
 0% {
   background-position: 0% 50%;
 }
@@ -81,14 +83,25 @@
 100% {
   background-position: 0% 50%;
 }
-}
+} */
 .container {
-  background-color: rgba(211,211,211, 0.5);
+  background-color: #282c34;
+  height: 100vh;
+  max-width: unset;
+  
+  
+  
 }
 
 .centered {
-  height: 8vh; /* Magic here */
+  height: 23vh; /* Magic here */
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* body{
+  background-color: #282c34;
+} */
+
+

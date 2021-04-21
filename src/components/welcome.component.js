@@ -7,14 +7,14 @@ export default class Welcome extends Component {
     render() {
         return (
             <div>
-                <div className="centered">
-                    <h2>TAG FUEL</h2>
+                <div className="centered" name="title">
+                    <h2 style={{ color: 'white' }}>TAG FUEL</h2>
                 </div>
                 <div className="centered">
-                    <h3>Welcome</h3>
+                    <h3 style={{ color: 'white' }}>Welcome</h3>
                 </div>
                 <div className="centered">
-                    <h4>This is our Fuel Quote Webapp</h4>
+                    <h4 style={{ color: 'white' }}>This is our Fuel Quote Webapp</h4>
                 </div>
                     <div className="centered">
                         {'\n'}

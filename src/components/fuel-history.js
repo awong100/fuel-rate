@@ -69,11 +69,11 @@ function FuelHistory() {
   
   return (
     <div>
-      <h3>{user.name}'s Quote History</h3>
+      <h3 style={{ color: 'white' }}>{user.name}'s Quote History</h3>
       <table className="table">
         <thead className="thead-light">
           <tr>
-            <th>User ID</th>
+            <th >User ID</th>
             <th>Delivery Date</th>
             <th>price per gallon</th>
             <th>gallons</th>
@@ -84,7 +84,7 @@ function FuelHistory() {
             <th>Zip</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody style={{ color: 'white' }}>
           { QuoteList() }
         </tbody>
       </table>
