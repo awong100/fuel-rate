@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker";
 import { UserContext} from '../UserContext';
 import { useHistory } from "react-router-dom";
 import axios from "axios"

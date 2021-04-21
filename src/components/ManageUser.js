@@ -28,26 +28,26 @@ function ManageUser() {
     e.preventDefault(); // this is to prevent auto reload page
     console.log(name, add1, add2, city, stateAdd, zip)
     //setUser(user)
-    if(name != "" || user.name == ""){
+    if(name !== "" || user.name === ""){
       user.name = name
     }
 
-    if(add1 != "" || user.address1 == ""){
+    if(add1 !== "" || user.address1 === ""){
     user.address1 = add1
     }
-    if(add2 != ""){      
+    if(add2 !== ""){      
     user.address2 = add2
     }
     else{
       user.address2 = add2
     }
-    if(city != ""|| user.city == ""){
+    if(city !== ""|| user.city === ""){
     user.city = city
     } 
-    if(stateAdd != "" || user.stateAdd == ""){
+    if(stateAdd !== "" || user.stateAdd === ""){
     user.state = stateAdd
     }
-    if(zip != "" || user.zip == ""){
+    if(zip !== "" || user.zip === ""){
     user.zip = zip
     }
 
@@ -76,6 +76,7 @@ function ManageUser() {
         <div className="form-group">
           <label style={{ color: 'white' }}>Full Name: </label>
           <input
+            name="name-text"
             maxLength="50"
             type="text"
             required
@@ -87,6 +88,7 @@ function ManageUser() {
         <div className="form-group">
           <label style={{ color: 'white' }}>Address 1: </label>
           <input
+            name="add1-text"
             maxLength="100"
             type="text"
             required
@@ -98,6 +100,7 @@ function ManageUser() {
         <div className="form-group">
           <label style={{ color: 'white' }}>Address 2: </label>
           <input maxLength="100" 
+          name="add2-text"
           type="text" 
           className="form-control"
           defaultValue={user.address2}
@@ -107,6 +110,7 @@ function ManageUser() {
         <div className="form-group">
           <label style={{ color: 'white' }}>City: </label>
           <input type="text" 
+          name="city-text"
           required 
           className="form-control"
           defaultValue={user.city}
@@ -115,7 +119,7 @@ function ManageUser() {
         </div>
         <div className="form-group">
           <label style={{ color: 'white' }}>State: </label>
-          <select type="text" required className="form-control"
+          <select type="text" name="state-selector" required className="form-control"
             defaultValue={user.state}
             onChange={(e) =>  setStateAdd(e.target.value)}>
             <option value="AL">AL</option>
@@ -175,6 +179,7 @@ function ManageUser() {
         <div className="form-group">
           <label style={{ color: 'white' }}>Zipcode: </label>
           <input
+            name="zip-text"
             minLength="5"
             maxLength="9"
             type="text"
@@ -185,7 +190,7 @@ function ManageUser() {
           ></input>
         </div>
         <div className="form-group">
-          <input type="submit" value="Edit User" className="btn btn-primary" />
+          <input name="edit-btn" type="submit" value="Save Changes" className="btn btn-primary" />
         </div>
       </form>
     </div>

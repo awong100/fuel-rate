@@ -36,13 +36,9 @@ function App() {
           <Route component ={Navbar}/>
           ): null}
           <Route path="/" exact component={Welcome} />
-          
           <Route path="/create" component={CreateUser} />
           <Route path="/login" component={UserLogin} />
-          
-
           <Route path="/users/" component={UserList} />
-          
           <Route path="/manage" component={ManageUser} />
           <Route path="/quote" component={FuelQuote} />
           <Route path="/quotes" component={FuelHistory} />
