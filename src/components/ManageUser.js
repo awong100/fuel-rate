@@ -28,22 +28,26 @@ function ManageUser() {
     e.preventDefault(); // this is to prevent auto reload page
     console.log(name, add1, add2, city, stateAdd, zip)
     //setUser(user)
-    if(name != ""){
+    if(name != "" || user.name == ""){
       user.name = name
     }
-    if(add1 != ""){
+
+    if(add1 != "" || user.address1 == ""){
     user.address1 = add1
     }
-    if(add2 != ""){
+    if(add2 != ""){      
     user.address2 = add2
     }
-    if(city != ""){
+    else{
+      user.address2 = add2
+    }
+    if(city != ""|| user.city == ""){
     user.city = city
     } 
-    if(stateAdd != ""){
+    if(stateAdd != "" || user.stateAdd == ""){
     user.state = stateAdd
     }
-    if(zip != ""){
+    if(zip != "" || user.zip == ""){
     user.zip = zip
     }
 
