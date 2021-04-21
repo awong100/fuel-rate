@@ -46,6 +46,9 @@ function FuelQuote() {
     if (gallons > 1000){
       setGallonsFactor(0.2)
     }
+    else(
+      setGallonsFactor(0.3)
+    )
 
     let margin = base_price * (
       loc_factor
@@ -60,7 +63,8 @@ function FuelQuote() {
 
   const calculateSuggestedTotal = () => {
     // do some calculations on current price to get suggested price
-    setTotal(suggestedPrice * gallons)
+    let value = suggestedPrice * gallons
+    setTotal(value.toFixed(2))
   }
 
   // console.log(useLocation())
@@ -110,10 +114,10 @@ function FuelQuote() {
 
   return (
     <div>
-      <h3>Fuel Quote Form</h3>
+      <h3 style={{ color: 'white' }}>Fuel Quote Form</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Gallons Requested: </label>
+          <label style={{ color: 'white' }}>Gallons Requested: </label>
           <input
             maxLength="50"
             type="numeric"
@@ -124,7 +128,7 @@ function FuelQuote() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Delivery Address: </label>
+          <label style={{ color: 'white' }}>Delivery Address: </label>
           <input
             maxLength="100"
             type="text"
@@ -139,13 +143,13 @@ function FuelQuote() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Delivery Date: </label>
+          <label style={{ color: 'white' }}>Delivery Date: </label>
           <DatePicker
             selected = {deliveryDate}
             onChange={date => setDeliveryDate(date)}/>
         </div>
         <div className="form-group">
-          <label>Suggested Price: </label>
+          <label style={{ color: 'white' }}>Suggested Price: </label>
           <input
             type="text"
             className="form-control"
@@ -154,7 +158,7 @@ function FuelQuote() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Total amount due: </label>
+          <label style={{ color: 'white' }}>Total amount due: </label>
           <input
             maxLength="50"
             type="text"
@@ -169,7 +173,7 @@ function FuelQuote() {
         <div className="form-group">
           <input
             type="button"
-            value="Get Total"
+            value="Get Quote"
             className="btn btn-primary"
             onClick={(calculateSuggestedTotal)}
           />
@@ -177,7 +181,7 @@ function FuelQuote() {
           
           <input
             type="submit"
-            value="Store Quote"
+            value="Submit Quote"
             className="btn btn-primary"
             
           />

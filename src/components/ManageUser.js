@@ -9,7 +9,7 @@ function ManageUser() {
 
   // the way this is currently structured, users are required to modify
   // all fields even if they desire to modify just 1 field. this is BAD!
-  
+  const { user, setUser } = useContext(UserContext)
   const [name, setName] = useState("")
   const [add1, setAdd1] = useState("")
   const [add2, setAdd2] = useState("")
@@ -20,7 +20,7 @@ function ManageUser() {
   let history = useHistory()
 
 
-  const { user, setUser } = useContext(UserContext)
+  
   console.log(user)
 
 
@@ -28,13 +28,28 @@ function ManageUser() {
     e.preventDefault(); // this is to prevent auto reload page
     console.log(name, add1, add2, city, stateAdd, zip)
     //setUser(user)
-    user.name = name
-    user.address1 = add1
-    user.address2 = add2
-    user.city = city
-    user.state = stateAdd
-    user.zip = zip
+    if(name != "" || user.name == ""){
+      user.name = name
+    }
 
+    if(add1 != "" || user.address1 == ""){
+    user.address1 = add1
+    }
+    if(add2 != ""){      
+    user.address2 = add2
+    }
+    else{
+      user.address2 = add2
+    }
+    if(city != ""|| user.city == ""){
+    user.city = city
+    } 
+    if(stateAdd != "" || user.stateAdd == ""){
+    user.state = stateAdd
+    }
+    if(zip != "" || user.zip == ""){
+    user.zip = zip
+    }
 
     axios({
       method: "post",
@@ -53,13 +68,13 @@ function ManageUser() {
 
   return (
     <div>
-      <h3>Manage User '{ user.username }'</h3>
-      <h4 style={{ color: 'red' }} >
+      <h3 style={{ color: 'white' }}>Manage User '{ user.username }'</h3>
+      {/* <h4 style={{ color: 'red' }} >
         Note: User must modify all fields if they wish to edit their profile information
-      </h4>
+      </h4> */}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Full Name: </label>
+          <label style={{ color: 'white' }}>Full Name: </label>
           <input
             maxLength="50"
             type="text"
@@ -70,7 +85,7 @@ function ManageUser() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Address 1: </label>
+          <label style={{ color: 'white' }}>Address 1: </label>
           <input
             maxLength="100"
             type="text"
@@ -81,7 +96,7 @@ function ManageUser() {
           ></input>
         </div>
         <div className="form-group">
-          <label>Address 2: </label>
+          <label style={{ color: 'white' }}>Address 2: </label>
           <input maxLength="100" 
           type="text" 
           className="form-control"
@@ -90,7 +105,7 @@ function ManageUser() {
           </input>
         </div>
         <div className="form-group">
-          <label>City: </label>
+          <label style={{ color: 'white' }}>City: </label>
           <input type="text" 
           required 
           className="form-control"
@@ -99,9 +114,9 @@ function ManageUser() {
           </input>
         </div>
         <div className="form-group">
-          <label>State: </label>
+          <label style={{ color: 'white' }}>State: </label>
           <select type="text" required className="form-control"
-            value={user.state}
+            defaultValue={user.state}
             onChange={(e) =>  setStateAdd(e.target.value)}>
             <option value="AL">AL</option>
             <option value="AK">AK</option>
@@ -158,7 +173,7 @@ function ManageUser() {
           </select>
         </div>
         <div className="form-group">
-          <label>Zipcode: </label>
+          <label style={{ color: 'white' }}>Zipcode: </label>
           <input
             minLength="5"
             maxLength="9"
