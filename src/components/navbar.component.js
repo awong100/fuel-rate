@@ -15,14 +15,7 @@ function Navbar() {
         </Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
-          {user ? (
-            <li className="navbar-item">
-              <Link to="/users" className="nav-link">
-                Users
-              </Link>
-            </li>
-            ): null}
-            
+                    
 
 
 

@@ -26,30 +26,14 @@ function ManageUser() {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // this is to prevent auto reload page
-    console.log(name, add1, add2, city, stateAdd, zip)
+    //console.log(name, add1, add2, city, stateAdd, zip)
     //setUser(user)
-    if(name !== "" || user.name === ""){
-      user.name = name
-    }
-
-    if(add1 !== "" || user.address1 === ""){
-    user.address1 = add1
-    }
-    if(add2 !== ""){      
-    user.address2 = add2
-    }
-    else{
-      user.address2 = add2
-    }
-    if(city !== ""|| user.city === ""){
-    user.city = city
-    } 
-    if(stateAdd !== "" || user.stateAdd === ""){
-    user.state = stateAdd
-    }
-    if(zip !== "" || user.zip === ""){
-    user.zip = zip
-    }
+    if(name !== "" || user.name === ""){user.name = name}
+    if(add1 !== "" || user.address1 === ""){user.address1 = add1}
+    if(add2 !== ""){user.address2 = add2}else{user.address2 = add2}
+    if(city !== ""|| user.city === ""){user.city = city} 
+    if(stateAdd !== "" || user.stateAdd === ""){user.state = stateAdd}
+    if(zip !== "" || user.zip === ""){user.zip = zip}
 
     axios({
       method: "post",
